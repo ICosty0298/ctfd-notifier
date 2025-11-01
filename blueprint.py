@@ -9,13 +9,13 @@ notifier_bp = Blueprint("notifier", __name__, template_folder="templates")
 
 
 def load_bp(plugin_route):
-    @notifier_bp.route(plugin_route, methods=["GET"])
+    @notifier_bp.route(plugin_route, methods=["GET"], endpoint="notifier.get_notify_config")
     @admins_only
     def get_notify_config():
         config = DBUtils.get_notify_config()
         return render_template("ctfd_notifier/config.html", config=config)
 
-    @notifier_bp.route(plugin_route, methods=["POST"])
+    @notifier_bp.route(plugin_route, methods=["POST"], endpoint="notifier.update_config")
     @admins_only
     def update_config():
         config = request.form.to_dict()
