@@ -50,7 +50,7 @@ def telegram_notify(solve, token: str, chat_id: int, message_thread_id: int):
 
 
 def on_solve(mapper, conn, solve):
-    config = DBUtils.get_configuration()
+    config = DBUtils.get_notify_config()
     solves = _getSolves(solve.challenge_id)
 
     if solves == 1:

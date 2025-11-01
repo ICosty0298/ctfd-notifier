@@ -11,8 +11,8 @@ notifier_bp = Blueprint("notifier", __name__, template_folder="templates")
 def load_bp(plugin_route):
     @notifier_bp.route(plugin_route, methods=["GET"])
     @admins_only
-    def get_configuration():
-        config = DBUtils.get_configuration()
+    def get_notify_config():
+        config = DBUtils.get_notify_config()
         return render_template("ctfd_notifier/config.html", config=config)
 
     @notifier_bp.route(plugin_route, methods=["POST"])
@@ -25,12 +25,12 @@ def load_bp(plugin_route):
 
         if len(errors) > 0:
             return render_template(
-                "ctfd_notifier/config.html", config=DBUtils.get_configuration(), errors=errors
+                "ctfd_notifier/config.html", config=DBUtils.get_notify_config(), errors=errors
             )
         else:
             DBUtils.save_config(config.items())
             return render_template(
-                "ctfd_notifier/config.html", config=DBUtils.get_configuration()
+                "ctfd_notifier/config.html", config=DBUtils.get_notify_config()
             )
 
     return notifier_bp

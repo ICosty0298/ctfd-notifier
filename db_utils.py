@@ -23,7 +23,7 @@ class DBUtils:
         return NotifierConfig.query.filter_by(key=key).first()
 
     @staticmethod
-    def get_configuration():
+    def get_notify_config():
         configs = NotifierConfig.query.all()
         result = {}
 
